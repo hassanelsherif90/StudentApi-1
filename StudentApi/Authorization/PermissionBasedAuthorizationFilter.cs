@@ -8,8 +8,6 @@ namespace StudentApi.Authorization
 
     public class PermissionBasedAuthorizationFilter(AppDbcontext appDbcontext) : IAuthorizationFilter
     {
-
-
         public void OnAuthorization(AuthorizationFilterContext context)
         {
             CheckPermissionAttribute? attribute = (CheckPermissionAttribute?)context.ActionDescriptor.EndpointMetadata

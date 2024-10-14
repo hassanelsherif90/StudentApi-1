@@ -4,7 +4,7 @@ using Microsoft.Extensions.Options;
 namespace StudentApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ConfigController : ControllerBase
     {
         private readonly IConfiguration _configuration;
@@ -17,7 +17,7 @@ namespace StudentApi.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet("Get")]
         public IActionResult Get()
         {
             var config = new

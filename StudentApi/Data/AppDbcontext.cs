@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentApi.Data.Entities;
 
+
 namespace StudentApi.Data;
 
 public partial class AppDbcontext : DbContext

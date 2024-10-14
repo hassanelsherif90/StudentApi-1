@@ -1,34 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using StudentApi.Data;
-using StudentApi.Data.Entities;
+using StudentApi.Model;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
 namespace StudentApi.Controllers
 {
-    [Route("[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class UsersController(JwtOptions jwtOptions, AppDbcontext dbcontext) : ControllerBase
     {
-        [HttpPost("Register")]
-        public ActionResult Register()
-        {
 
-            return Ok();
-
-        }
-
-
-        [HttpPost("Login")]
+        [HttpPost]
         [Route("auth")]
-
-        public ActionResult<string> Login(AuthenticatinRequest request)
+        public ActionResult<string> PostLogin(AuthenticatinRequest request)
         {
-            var user = dbcontext.Users.FirstOrDefault(x =>
-                                    x.UserName == request.userName &&
-                                    x.Password == request.password);
+            var user = dbcontext.Users.FirstOrDefault(x => x.UserName == request.userName && x.Password == request.password);
 
             if (user == null)
             {
@@ -41,6 +30,7 @@ namespace StudentApi.Controllers
                 Issuer = jwtOptions.Issuer,
                 Audience = jwtOptions.Audience,
 
+
                 SigningCredentials = new SigningCredentials
                 (
                     new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.SigningKey)),
@@ -49,8 +39,8 @@ namespace StudentApi.Controllers
 
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString() ),
-                    new Claim(ClaimTypes.Name, user.UserName)
+                        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString() ),
+                        new Claim(ClaimTypes.Name, user.UserName)
                 })
 
             };

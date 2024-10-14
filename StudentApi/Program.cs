@@ -7,13 +7,13 @@ using StudentApi.Data;
 using StudentDataAccessLayer;
 using System.Text;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<attachmentOptions>(builder.Configuration.GetSection("Attachments"));
 
 
-builder.Services.AddDbContext<AppDbcontext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<AppDbcontext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add services to the container.
 
